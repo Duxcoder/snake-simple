@@ -3,3 +3,33 @@
     border: 2px solid rgb(209, 209, 209);
     margin: 20px
 }
+.game_over {
+    position: absolute;
+    background: rgb(234, 234, 234);
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    border: solid 1px #000;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.you_lose {
+position: relative;
+font-size: 20px;
+}
+.score {
+position: relative;
+font-size: 12px;
+}
+button.again {
+width: 60%;
+height: 40px;
+border: solid 1px #000;
+background: #fff;
+
+}
