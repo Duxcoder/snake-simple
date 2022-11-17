@@ -115,6 +115,17 @@ function game (gameOver){
             
         rerenderBooster(booster);
         const [lastX, lastY] = globalSteps.at(-1);
+        const gameOverGroup = () => {
+            document.removeEventListener('keydown', clickOnKey)
+            window.clearInterval(window.timer); 
+            gameOver(globalSteps.length);
+        }
+        let arr = Array.from(globalSteps)
+        console.log(arr);
+        arr.pop();
+        console.log(arr.includes([lastX, lastY]), arr, lastX, lastY)
+        let cannibalSnake = arr.find(([a, b]) => (a === lastX && b === lastY));
+        console.log(cannibalSnake)
         let grow = JSON.stringify([lastX, lastY]) == JSON.stringify(positionBooster);
             switch(step){
                 case 'D': globalSteps.push([lastX + pxBody, lastY]); break;
@@ -123,16 +134,18 @@ function game (gameOver){
                 case 'W': globalSteps.push([lastX, lastY - pxBody]); break;
                 default: console.log('error'); break;
             }
-            if (lastX >= boardSize[0] || globalSteps.at(-1)[0] <= -pxBody || globalSteps.at(-1)[1] <= -pxBody || lastY >= boardSize[1]) 
+            if (lastX >= boardSize[0] ||
+                 globalSteps.at(-1)[0] <= -pxBody || 
+                 globalSteps.at(-1)[1] <= -pxBody || 
+                 lastY >= boardSize[1] ||
+                 cannibalSnake
+                 ) 
             {
-            document.removeEventListener('keydown', clickOnKey)
-            window.clearInterval(window.timer); 
-            gameOver(globalSteps.length);} else {
+            gameOverGroup()} else {
             renderSnake(globalSteps, pxBody, globalSteps.length)
             if (!grow) { 
                 globalSteps.shift();
             } else {
-                console.log('true')
                 booster = createRandomBooster(boardSize);
             }}
         }, 100)
