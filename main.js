@@ -121,11 +121,8 @@ function game (gameOver){
             gameOver(globalSteps.length);
         }
         let arr = Array.from(globalSteps)
-        console.log(arr);
         arr.pop();
-        console.log(arr.includes([lastX, lastY]), arr, lastX, lastY)
         let cannibalSnake = arr.find(([a, b]) => (a === lastX && b === lastY));
-        console.log(cannibalSnake)
         let grow = JSON.stringify([lastX, lastY]) == JSON.stringify(positionBooster);
             switch(step){
                 case 'D': globalSteps.push([lastX + pxBody, lastY]); break;
